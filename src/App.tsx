@@ -4,8 +4,24 @@ import PeopleToFollow from "./components/PeopleToFollow"
 import TopicsList from "./components/TopicsList"
 import TrendsList from "./components/TrendsList"
 import { BlogProvider } from "./share/BlogContext"
+import { useState } from "react"
 
 const App = () => {
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
+
+  const openModalForNewBlog = () => {
+    setEditingBlog(null);
+    setModalOpen(true);
+
+  };
+
+  const openModalForEdit = () => {
+    setEditingBlog(blog);
+    setModalOpen(true);
+  };
+
   return (
     <div>
       <BlogProvider>
@@ -15,9 +31,15 @@ const App = () => {
           {/* main area*/}
           <section className="mx-auto p-6">
             <div>
-              <button onClick={openModelForNewBlog} className="ml-[7rem] bg-black flex justify-center items-center text-white px-4 py-2 rounded mb-4">
+              <button onClick={openModalForNewBlog} className="ml-[7rem] bg-black flex justify-center items-center text-white px-4 py-2 rounded mb-4">
                 Add New Blog <IoMdAddCircle className="ml-[0.5rem]"/>
               </button>
+
+              {/* Article List */}
+              {isModalOpen && (
+                <Modal></Modal>
+              )}
+
             </div>
           </section>
 
