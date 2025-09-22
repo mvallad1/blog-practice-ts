@@ -7,6 +7,8 @@ import { BlogProvider } from "./share/BlogContext"
 import { useState } from "react"
 import Modal from "./components/Modal"
 import BlogForm from "./components/BlogForm"
+import ArticleList from "./components/ArticleList"
+import type { Blog } from "./types"
 
 const App = () => {
 
@@ -19,7 +21,7 @@ const App = () => {
 
   };
 
-  const openModalForEdit = () => {
+  const openModalForEdit = (blog: Blog) => {
     setEditingBlog(blog);
     setModalOpen(true);
   };
@@ -38,6 +40,9 @@ const App = () => {
               </button>
 
               {/* Article List */}
+
+              <ArticleList onEdit={openModalForEdit} />
+
               {isModalOpen && <Modal onClose={() => setModalOpen(false)}>
                 
                 <BlogForm existingBlog={editingBlog} onClose={() => setModalOpen(false)} />
