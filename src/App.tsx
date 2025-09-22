@@ -5,6 +5,8 @@ import TopicsList from "./components/TopicsList"
 import TrendsList from "./components/TrendsList"
 import { BlogProvider } from "./share/BlogContext"
 import { useState } from "react"
+import Modal from "./components/Modal"
+import BlogForm from "./components/BlogForm"
 
 const App = () => {
 
@@ -36,9 +38,11 @@ const App = () => {
               </button>
 
               {/* Article List */}
-              {isModalOpen && (
-                <Modal></Modal>
-              )}
+              {isModalOpen && <Modal onClose={() => setModalOpen(false)}>
+                
+                <BlogForm existingBlog={editingBlog} onClose={() => setModalOpen(false)} />
+                
+              </Modal>}
 
             </div>
           </section>
